@@ -1,0 +1,5 @@
+#Copy these constants and populate into your own .env file
+SOURCE_AZURE_SUBSCRIPTION_ID=""
+SOURCE_RESOURCE_GROUP_NAME=""
+TARGET_AZURE_SUBSCRIPTION_ID=""
+TARGET_RESOURCE_GROUP_NAME=""
