@@ -1,4 +1,3 @@
 azure-mgmt-resource
 azure-identity
 python-dotenv
-requests
