@@ -7,46 +7,33 @@ This script takes a Source SubscriptionID and Source ResourceGroup as
 parameters, analyzes the subscription/resource group.
 and gathers a list of resource Ids and excludes those 
 resources that cannot be moved based on the resource ID list.
-"""
-import os
-import re
-import functools
-import logging
-import time
-import requests
 
-from dotenv import load_dotenv
+Usage:
+      python3 main.py --SourceSubscriptionId "XXXX-XXXX-XXXX-XXXX" 
+                      --SourceResourceGroup "SourceRSG" 
+                      --TargetSubscriptionId "XXXX-XXXX-XXXX-XXXX" 
+                      --TargetResourceGroup "TargetRSG"
+"""
+__author__ = "Aaron Saikovski"
+__contact__ = "asaikovski@outlook.com"
+__license__ = "MIT"
+__maintainer__ = "developer"
+__status__ = "Production"
+__version__ = "2.0.0"
+
+import re
+import time
+import argparse
+import requests
 from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
 
+#Custom modules
 import console_helper
+import logging_helper
 
 
-# set logging level
-logging.basicConfig(level = logging.INFO)
-logger = logging.getLogger()
-
-def log(func):
-    '''
-    Logging decorator
-    source: https://ankitbko.github.io/blog/2021/04/logging-in-python/
-    '''
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        args_repr = [repr(a) for a in args]
-        kwargs_repr = [f"{k}={v!r}" for k, v in kwargs.items()]
-        signature = ", ".join(args_repr + kwargs_repr)
-        logger.debug("function {%f} called with args {%s}",func.__name__,signature)
-        try:
-            result = func(*args, **kwargs)
-            return result
-        except Exception as ex:
-            # pylint: disable=logging-fstring-interpolation
-            logger.exception(f"Exception raised in {func.__name__}. exception: {str(ex)}")
-            raise ex
-    return wrapper
-
-@log
+@logging_helper.log
 def check_valid_subscription_id(subscription_id: str) -> bool:
     '''
     checks for a valid Azure Subscription ID - Format 00000000-0000-0000-0000-000000000000
@@ -56,10 +43,10 @@ def check_valid_subscription_id(subscription_id: str) -> bool:
         # pylint: disable=line-too-long
         # pylint: disable=anomalous-backslash-in-string
         re_result = re.search("^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$", subscription_id)
-        if re_result:
-            return True
+        return bool(re_result)
+    return False
 
-@log
+@logging_helper.log
 def get_resource_client(source_subscription_id: str) -> ResourceManagementClient:
     '''
     Gets the resource client for the current AZ context
@@ -72,7 +59,7 @@ def get_resource_client(source_subscription_id: str) -> ResourceManagementClient
         # Obtain the management object for resources.
         return ResourceManagementClient(credential, source_subscription_id)
 
-@log
+@logging_helper.log
 def get_az_cached_access_token() -> object:
     '''
     Gets the cached access token from the AZ CLI session token
@@ -81,8 +68,7 @@ def get_az_cached_access_token() -> object:
     access_token = credential.get_token("https://management.azure.com/.default")
     return access_token.token
 
-
-@log
+@logging_helper.log
 def get_resource_ids(resource_client: str,
                      source_resource_group: str) -> list[str]:
     '''
@@ -92,12 +78,10 @@ def get_resource_ids(resource_client: str,
         source_resource_group, expand = "createdTime,changedTime")
 
     # get the resource ids as a list
-    resource_ids = []
-    for resource in resources:
-        resource_ids.append(resource.id)
+    resource_ids = [resource.id for resource in resources]
     return resource_ids
 
-@log
+@logging_helper.log
 def create_request_header(cached_access_token: str) -> str:
     '''
     Creates a request header to pass to the API call
@@ -109,7 +93,7 @@ def create_request_header(cached_access_token: str) -> str:
     }
     return request_header
 
-@log
+@logging_helper.log
 def create_request_body(target_subscription_id:str,
                         target_resource_group: str,
                         resource_ids: str) -> str:
@@ -122,7 +106,7 @@ def create_request_body(target_subscription_id:str,
                         "targetResourceGroup":target_resource_group}).replace("'", '"')
     return request_body
 
-@log
+@logging_helper.log
 def call_validate_api(source_subscription_id: str,
                       source_resource_group: str,
                       request_header: str,
@@ -140,7 +124,7 @@ def call_validate_api(source_subscription_id: str,
     return api_response
 
 
-@log
+@logging_helper.log
 def call_management_api(source_api_response: requests.Response,
                         request_header: str) -> str:
     '''
@@ -174,7 +158,7 @@ def call_management_api(source_api_response: requests.Response,
 
             # Get the response code
             validate_api_status_code = management_api.status_code
-            console_helper.print_confirmation_message(f"Status code is: {validate_api_status_code}")
+            console_helper.print_confirmation_message("Processing....")
 
             #Get the response data back from the API call
             validate_api_response_data = management_api.content
@@ -185,29 +169,40 @@ def call_management_api(source_api_response: requests.Response,
         # Report status back
         # 204 - Success resources can be moved
         if validate_api_status_code == 204:
-            console_helper.print_ok_message("**SUCCESS CODE 204 - NO ISSUES FOUND**")
+            console_helper.print_ok_message("**SUCCESS CODE = 204 - NO ISSUES FOUND**")
         # 409 - resources cannot be moved
         elif validate_api_status_code == 409:
-            console_helper.print_error_message("**ERROR CODE 409 - ISSUES FOUND**")
-            console_helper.print_error_message(f"Error Data: {validate_api_response_data}")
+            console_helper.print_error_message("**ERROR CODE = 409 - ISSUES FOUND**")
+            console_helper.print_error_message(f"Detailed Error Data: {validate_api_response_data}")
         # Some other error
         else:
             console_helper.print_error_message("**UNKNOWN ERROR**")
 
 
-@log
+@logging_helper.log
 def main() -> None:
     '''
     Main method
     '''
-    # take environment variables from .env.
-    load_dotenv()
 
-    # Retrieve Azure values from environment variables.
-    source_subscription_id = os.getenv("SOURCE_AZURE_SUBSCRIPTION_ID")
-    source_resource_group = os.getenv("SOURCE_RESOURCE_GROUP_NAME")
-    target_subscription_id = os.getenv("TARGET_AZURE_SUBSCRIPTION_ID")
-    target_resource_group = os.getenv("TARGET_RESOURCE_GROUP_NAME")
+    # help message string
+    # pylint: disable=line-too-long
+    help_msg: str = "Validates a source Azure resource group and all child resources to check for moveability support into a target resource group within a target subscription."
+
+    #add Args
+    parser = argparse.ArgumentParser(description = help_msg)
+    parser.add_argument('--SourceSubscriptionId', '-srcsubid', required=True, help='Source Subscription Id.')
+    parser.add_argument('--SourceResourceGroup', '-srcrsg',  required=True, help='Source Resource Group.')
+    parser.add_argument('--TargetSubscriptionId', '-targsubid',  required=True, help='Target Subscription Id.')
+    parser.add_argument('--TargetResourceGroup', '-targrsg',  required=True, help='Target Resource Group.')
+    args = parser.parse_args()
+
+
+    # set values from command line
+    source_subscription_id = args.SourceSubscriptionId
+    source_resource_group =  args.SourceResourceGroup
+    target_subscription_id = args.TargetSubscriptionId
+    target_resource_group = args.TargetResourceGroup
 
     console_helper.print_ok_message("***STARTED PROCESSING***")
 
@@ -238,4 +233,3 @@ def main() -> None:
 # call main
 if __name__ == '__main__':
     main()
-    
