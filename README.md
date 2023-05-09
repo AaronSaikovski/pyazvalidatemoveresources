@@ -18,7 +18,7 @@ and gathers a list of resource Ids and resources that can and cannot be moved an
 
 ### Software Requirements ###
 * Python 3.10.10 or later
-* pip 23.0.1 or later (Future releases my use miniconda)
+* pip 23.0.1 or later (Future releases may use miniconda)
 * Azure CLI tools 2.48.1 or later
 * Python virtual environment and packages as specified in requirements.txt.  
 
