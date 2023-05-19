@@ -1,16 +1,3 @@
-<div align="center">
-
-# Python - Validate Move Azure Resources 
-
-Validates a source Azure resource group and all child resources to check for moveability support into a target resource group within a target subscription.  
-
-[![Build Status](https://github.com/AaronSaikovski/pyazvalidatemoveresources/workflows/build/badge.svg)](https://github.com/UAaronSaikovski/pyazvalidatemoveresources/actions)
-[![Coverage Status](https://coveralls.io/repos/github/AaronSaikovski/pyazvalidatemoveresources/badge.svg?branch=main)](https://coveralls.io/github/AaronSaikovski/pyazvalidatemoveresources?branch=main)
-[![Licence](https://img.shields.io/github/license/AaronSaikovski/pyazvalidatemoveresources)](LICENSE)
-
-
-</div>
-
 ## Python - Validate Move Azure Resources 
 
 
@@ -20,6 +7,7 @@ Version History:
 * 3.0 - Now uses modules and has limited unit testing.
 
 ### Description ###
+Validates a source Azure resource group and all child resources to check for moveability support into a target resource group within a target subscription.  
 
 This script takes a Source SubscriptionID and Source ResourceGroup as parameters, analyzes the subscription/resource group.
 and gathers a list of resource Ids and resources that can and cannot be moved and reports accordingly.  
