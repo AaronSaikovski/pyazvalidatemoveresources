@@ -1,6 +1,5 @@
 
 from azure.identity import AzureCliCredential
-from azure.mgmt.resource import ResourceManagementClient
 
 import common.constants as constants
 
