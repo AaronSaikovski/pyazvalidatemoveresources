@@ -1,8 +1,9 @@
-import requests
 import time
 
-import utils.console_helper as console_helper
+import requests
+
 import common.constants as constants
+import utils.console_helper as console_helper
 
 
 def call_validate_api(

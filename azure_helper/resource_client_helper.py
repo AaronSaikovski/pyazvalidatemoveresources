@@ -3,6 +3,7 @@ from azure.mgmt.resource import ResourceManagementClient
 
 import azure_helper.subscription_helper as sub_helper
 
+
 def get_resource_client(source_subscription_id: str) -> ResourceManagementClient:
     '''
     Gets the resource client for the current AZ context

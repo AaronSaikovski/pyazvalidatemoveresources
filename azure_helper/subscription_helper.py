@@ -1,6 +1,7 @@
 
 import re
 
+
 def check_valid_subscription_id(subscription_id: str) -> bool:
     '''
     checks for a valid Azure 

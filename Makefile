@@ -40,7 +40,7 @@ install:
 	$(PYTHON_BINARY) -m venv $(VIRTUAL_ENV)
 	$(VIRTUAL_BIN)/pip install -e ."[dev]"
 
-## isort - Sorts imports throughout the project
+# isort - Sorts imports throughout the project
 isort:
 	$(VIRTUAL_BIN)/isort $(PROJECT_NAME)/ $(TEST_DIR)/
 

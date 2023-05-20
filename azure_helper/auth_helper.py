@@ -3,6 +3,7 @@ from azure.identity import AzureCliCredential
 
 import common.constants as constants
 
+
 def get_az_cached_access_token() -> object:
     '''
     Gets the cached access token from the AZ CLI session token
