@@ -7,10 +7,7 @@ import utils.console_helper as console_helper
 
 
 def call_validate_api(
-    source_subscription_id: str, 
-    source_resource_group: str, 
-    request_header: str, 
-    request_body: str
+    source_subscription_id: str, source_resource_group: str, request_header: str, request_body: str
 ) -> requests.Response:
     '''
     Calls the validateMoveResources to check if the resources can be moved.
@@ -24,16 +21,12 @@ def call_validate_api(
 
     # Call the API - Using requests library
     api_response = requests.post(
-        url=validate_move_api, 
-        data=request_body, 
-        headers=request_header, 
-        timeout=constants.API_TIMEOUT
+        url=validate_move_api, data=request_body, headers=request_header, timeout=constants.API_TIMEOUT
     )
     return api_response
 
 
-def call_management_api(source_api_response: requests.Response, 
-                        request_header: str) -> str:
+def call_management_api(source_api_response: requests.Response, request_header: str) -> str:
     '''
     Calls the Validation Management API URI from the raw initial payload
 
@@ -56,14 +49,12 @@ def call_management_api(source_api_response: requests.Response,
         check_uri = api_response_headers['Location']
 
         # do the loop until we aren't receiving a 202 return code back
-        # API doesnt get called the first time 
+        # API doesnt get called the first time
         # around due to throttling/the API not being called
         while validate_api_status_code == 202:
-            # Call the Management API from the 
+            # Call the Management API from the
             # Location header value from the validation API call
-            management_api = requests.get(url=check_uri, 
-                                          headers=request_header, 
-                                          timeout=constants.API_TIMEOUT)
+            management_api = requests.get(url=check_uri, headers=request_header, timeout=constants.API_TIMEOUT)
 
             # Get the response code
             validate_api_status_code = management_api.status_code
