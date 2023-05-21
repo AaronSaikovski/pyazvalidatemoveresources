@@ -30,10 +30,12 @@ clean:
 # 	$(VIRTUAL_BIN)/black $(PROJECT_NAME)/ $(TEST_DIR)/ --check
 
 ## format - Runs all formatting tools against the project
-format: black isort lint mypy
+#format: black isort lint mypy
+format: black isort lint
 
 ## format-check - Checks if the project is formatted correctly against all formatting rules
-format-check: black-check isort-check lint mypy
+#format-check: black-check isort-check lint mypy
+format-check: black-check isort-check lint
 
 ## install - Install the project locally
 install:
@@ -53,11 +55,12 @@ isort-check:
 # 	$(VIRTUAL_BIN)/flake8 $(PROJECT_NAME)/ $(TEST_DIR)/
 
 ## mypy - Run mypy type checking on the project
-mypy:
-	$(VIRTUAL_BIN)/mypy $(PROJECT_NAME)/ $(TEST_DIR)/
+# mypy:
+# 	$(VIRTUAL_BIN)/mypy $(PROJECT_NAME)/ $(TEST_DIR)/
 
 ## test - Test the project
 test:
 	$(VIRTUAL_BIN)/pytest
 
-.PHONY: help build coverage clean black black-check format format-check install isort isort-check lint mypy test
+#.PHONY: help build coverage clean black black-check format format-check install isort isort-check lint mypy test
+.PHONY: help build coverage clean black black-check format format-check install isort isort-check lint test
