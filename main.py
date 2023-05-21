@@ -43,29 +43,17 @@ def main() -> None:
     # help message string
     # pylint: disable=line-too-long
     help_msg: str = (
-        "Validates a source Azure resource group" 
+        "Validates a source Azure resource group"
         "and all child resources to check for moveability support into a target"
         " resource group within a target subscription."
     )
 
     # add Args
     parser = argparse.ArgumentParser(description=help_msg)
-    parser.add_argument('--SourceSubscriptionId', 
-                        '-srcsubid', 
-                        required=True, 
-                        help='Source Subscription Id.')
-    parser.add_argument('--SourceResourceGroup', 
-                        '-srcrsg', 
-                        required=True, 
-                        help='Source Resource Group.')
-    parser.add_argument('--TargetSubscriptionId', 
-                        '-targsubid', 
-                        required=True, 
-                        help='Target Subscription Id.')
-    parser.add_argument('--TargetResourceGroup', 
-                        '-targrsg',
-                          required=True,
-                         help='Target Resource Group.')
+    parser.add_argument('--SourceSubscriptionId', '-srcsubid', required=True, help='Source Subscription Id.')
+    parser.add_argument('--SourceResourceGroup', '-srcrsg', required=True, help='Source Resource Group.')
+    parser.add_argument('--TargetSubscriptionId', '-targsubid', required=True, help='Target Subscription Id.')
+    parser.add_argument('--TargetResourceGroup', '-targrsg', required=True, help='Target Resource Group.')
     args = parser.parse_args()
 
     # set values from command line
@@ -80,16 +68,13 @@ def main() -> None:
     resource_client = res_client_helper.get_resource_client(source_subscription_id)
 
     # Get the resource IDs
-    resource_ids = res_client_helper.get_resource_ids(resource_client, 
-                                                      source_resource_group)
+    resource_ids = res_client_helper.get_resource_ids(resource_client, source_resource_group)
 
     # Build the request header - passing in the access token
     request_header = req_helper.create_request_header(auth_helper.get_az_cached_access_token())
 
     # Build the body of the request to be passed to the API
-    request_body = req_helper.create_request_body(target_subscription_id, 
-                                                  target_resource_group, 
-                                                  resource_ids)
+    request_body = req_helper.create_request_body(target_subscription_id, target_resource_group, resource_ids)
 
     # Call the API and get a response code back
     api_response = api_helper.call_validate_api(
