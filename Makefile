@@ -50,7 +50,7 @@ isort:
 isort-check:
 	$(VIRTUAL_BIN)/isort $(PROJECT_NAME)/ $(TEST_DIR)/ --check-only
 
-## lint - Lint the project
+# # lint - Lint the project
 # lint:
 # 	$(VIRTUAL_BIN)/flake8 $(PROJECT_NAME)/ $(TEST_DIR)/
 
