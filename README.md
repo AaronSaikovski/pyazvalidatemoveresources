@@ -4,7 +4,7 @@
 
 Validates a source Azure resource group and all child resources to check for moveability support into a target resource group within a target subscription.  
 
-[![Build Status](https://github.com/AaronSaikovski/pyazvalidatemoveresources/workflows/build/badge.svg)](https://github.com/UAaronSaikovski/pyazvalidatemoveresources/actions)
+[![Build Status](https://github.com/AaronSaikovski/pyazvalidatemoveresources/workflows/build/badge.svg)](https://github.com/AaronSaikovski/pyazvalidatemoveresources/actions)
 [![Coverage Status](https://coveralls.io/repos/github/AaronSaikovski/pyazvalidatemoveresources/badge.svg?branch=main)](https://coveralls.io/github/AaronSaikovski/pyazvalidatemoveresources?branch=main)
 [![Licence](https://img.shields.io/github/license/AaronSaikovski/pyazvalidatemoveresources)](LICENSE)
 
