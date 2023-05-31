@@ -1,5 +1,5 @@
 # CHANGELOG
-## v3.0.1 (2023-05-31)
+## v3.0.2 (2023-05-31)
 - updated makefile to use standard version
 - added new github actions for validation
 

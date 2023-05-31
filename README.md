@@ -17,7 +17,7 @@ Version History:
 - 1.0 - Initial version to use environment variables
 - 2.0 - Now uses command line arguments and better error handling, other bug fixes.
 - 3.0 - Now uses modules and has limited unit testing.
-- 3.0.1 - New makefile and updated github action.
+- 3.0.2 - New makefile and updated github action.
 
 ### Description
 
