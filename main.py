@@ -19,7 +19,7 @@ __contact__ = "asaikovski@outlook.com"
 __license__ = "MIT"
 __maintainer__ = "developer"
 __status__ = "Production"
-__version__ = "3.0.0"
+__version__ = "3.0.1"
 
 
 import argparse
