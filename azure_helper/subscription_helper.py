@@ -2,10 +2,10 @@ import re
 
 
 def check_valid_subscription_id(subscription_id: str) -> bool:
-    '''
+    """
     checks for a valid Azure
     Subscription ID - Format 00000000-0000-0000-0000-000000000000
-    '''
+    """
     # check if a string
     if isinstance(subscription_id, str):
         # pylint: disable=line-too-long

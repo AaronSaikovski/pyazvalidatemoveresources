@@ -7,12 +7,15 @@ import utils.console_helper as console_helper
 
 
 def call_validate_api(
-    source_subscription_id: str, source_resource_group: str, request_header: str, request_body: str
+    source_subscription_id: str,
+    source_resource_group: str,
+    request_header: str,
+    request_body: str,
 ) -> requests.Response:
-    '''
+    """
     Calls the validateMoveResources to check if the resources can be moved.
     Ref: https://learn.microsoft.com/en-us/rest/api/resources/resources/validate-move-resources
-    '''
+    """
     # Build the API and call it and get the response code
     # pylint: disable=line-too-long
     validate_move_api = str(
@@ -21,20 +24,25 @@ def call_validate_api(
 
     # Call the API - Using requests library
     api_response = requests.post(
-        url=validate_move_api, data=request_body, headers=request_header, timeout=constants.API_TIMEOUT
+        url=validate_move_api,
+        data=request_body,
+        headers=request_header,
+        timeout=constants.API_TIMEOUT,
     )
     return api_response
 
 
-def call_management_api(source_api_response: requests.Response, request_header: str) -> str:
-    '''
+def call_management_api(
+    source_api_response: requests.Response, request_header: str
+) -> str:
+    """
     Calls the Validation Management API URI from the raw initial payload
 
     Perform the validation of resource move against the Management API
     Return codes:
         Success == HTTP response code 204 (no content)
         Error == HTTP response code 409 (Conflict)
-    '''
+    """
     # Get the Validation management URI from the raw content string payload
     check_uri: str
     validate_api_status_code: requests.Response = constants.API_SUCCESS
@@ -46,7 +54,7 @@ def call_management_api(source_api_response: requests.Response, request_header: 
         api_response_headers = source_api_response.headers
 
         # Get the Location from the response header
-        check_uri = api_response_headers['Location']
+        check_uri = api_response_headers["Location"]
 
         # do the loop until we aren't receiving a 202 return code back
         # API doesnt get called the first time
@@ -54,7 +62,9 @@ def call_management_api(source_api_response: requests.Response, request_header: 
         while validate_api_status_code == 202:
             # Call the Management API from the
             # Location header value from the validation API call
-            management_api = requests.get(url=check_uri, headers=request_header, timeout=constants.API_TIMEOUT)
+            management_api = requests.get(
+                url=check_uri, headers=request_header, timeout=constants.API_TIMEOUT
+            )
 
             # Get the response code
             validate_api_status_code = management_api.status_code
