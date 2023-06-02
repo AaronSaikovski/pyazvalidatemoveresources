@@ -1,6 +1,12 @@
+"""
+Azure Auth Helper
+"""
 from azure.identity import AzureCliCredential
 
 import common.constants as constants
+
+
+# ******************************************************************************** #
 
 
 def get_az_cached_access_token() -> object:
@@ -10,3 +16,6 @@ def get_az_cached_access_token() -> object:
     credential = AzureCliCredential()
     access_token = credential.get_token(constants.AZURE_MGMT_URL)
     return access_token.token
+
+
+# ******************************************************************************** #

@@ -1,7 +1,13 @@
+"""
+Azure ResourceClient Helper
+"""
+
 from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
 
 import azure_helper.subscription_helper as sub_helper
+
+# ******************************************************************************** #
 
 
 def get_resource_client(source_subscription_id: str) -> ResourceManagementClient:
@@ -17,6 +23,9 @@ def get_resource_client(source_subscription_id: str) -> ResourceManagementClient
         return ResourceManagementClient(credential, source_subscription_id)
 
 
+# ******************************************************************************** #
+
+
 def get_resource_ids(resource_client: str, source_resource_group: str) -> list[str]:
     """
     Gets the given resource IDs for a given resource group - returns a JSON str
@@ -28,3 +37,6 @@ def get_resource_ids(resource_client: str, source_resource_group: str) -> list[s
     # get the resource ids as a list
     resource_ids = [resource.id for resource in resources]
     return resource_ids
+
+
+# ******************************************************************************** #

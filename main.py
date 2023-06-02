@@ -14,13 +14,6 @@ Usage:
                       --TargetSubscriptionId "XXXX-XXXX-XXXX-XXXX" 
                       --TargetResourceGroup "TargetRSG"
 """
-__author__ = "Aaron Saikovski"
-__contact__ = "asaikovski@outlook.com"
-__license__ = "MIT"
-__maintainer__ = "developer"
-__status__ = "Production"
-__version__ = "3.0.1"
-
 
 import argparse
 
@@ -29,6 +22,7 @@ import azure_helper.auth_helper as auth_helper
 import azure_helper.request_helper as req_helper
 import azure_helper.resource_client_helper as res_client_helper
 import utils.console_helper as console_helper
+
 # Custom modules
 import utils.logging_helper as logging_helper
 

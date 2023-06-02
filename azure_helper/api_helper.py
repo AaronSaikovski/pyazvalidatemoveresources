@@ -1,9 +1,15 @@
+"""
+Azure API Helper
+"""
+
 import time
 
 import requests
 
 import common.constants as constants
 import utils.console_helper as console_helper
+
+# ******************************************************************************** #
 
 
 def call_validate_api(
@@ -30,6 +36,9 @@ def call_validate_api(
         timeout=constants.API_TIMEOUT,
     )
     return api_response
+
+
+# ******************************************************************************** #
 
 
 def call_management_api(
@@ -87,3 +96,6 @@ def call_management_api(
         # Some other error
         else:
             console_helper.print_error_message("**UNKNOWN ERROR**")
+
+
+# ******************************************************************************** #

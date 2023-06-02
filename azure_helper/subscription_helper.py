@@ -1,4 +1,10 @@
+"""
+Azure Subscription Helper
+"""
+
 import re
+
+# ******************************************************************************** #
 
 
 def check_valid_subscription_id(subscription_id: str) -> bool:
@@ -16,3 +22,6 @@ def check_valid_subscription_id(subscription_id: str) -> bool:
         )
         return bool(re_result)
     return False
+
+
+# ******************************************************************************** #

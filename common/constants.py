@@ -1,4 +1,6 @@
-# constants here
+"""
+Constants
+"""
 
 # Azure management URL
 AZURE_MGMT_URL: str = "https://management.azure.com/.default"

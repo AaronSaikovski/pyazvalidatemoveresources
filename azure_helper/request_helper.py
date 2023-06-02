@@ -1,3 +1,9 @@
+"""
+Azure Request Helper
+"""
+
+
+# ******************************************************************************** #
 def create_request_header(cached_access_token: str) -> str:
     """
     Creates a request header to pass to the API call
@@ -8,6 +14,9 @@ def create_request_header(cached_access_token: str) -> str:
         "Content-Type": "application/json",
     }
     return request_header
+
+
+# ******************************************************************************** #
 
 
 def create_request_body(
@@ -24,3 +33,6 @@ def create_request_body(
         {"resources": resource_ids, "targetResourceGroup": target_resource_group}
     ).replace("'", '"')
     return request_body
+
+
+# ******************************************************************************** #
