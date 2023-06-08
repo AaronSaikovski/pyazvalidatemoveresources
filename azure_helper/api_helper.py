@@ -12,6 +12,21 @@ import utils.console_helper as console_helper
 # ******************************************************************************** #
 
 
+# def call_validate_api(
+#     source_subscription_id: str,
+#     source_resource_group: str,
+#     request_header: str,
+#     request_body: str,
+# ) -> requests.Response:
+#     """
+#     Calls the validateMoveResources to check if the resources can be moved.
+#     Ref: https://learn.microsoft.com/en-us/rest/api/resources/resources/validate-move-resources
+#     """
+#     # Build the API and call it and get the response code
+#     # pylint: disable=line-too-long
+
+#     # Call the API - Using requests library
+
 def call_validate_api(
     source_subscription_id: str,
     source_resource_group: str,
@@ -29,14 +44,12 @@ def call_validate_api(
     )
 
     # Call the API - Using requests library
-    api_response = requests.post(
+    return requests.post(
         url=validate_move_api,
         data=request_body,
         headers=request_header,
         timeout=constants.API_TIMEOUT,
     )
-    return api_response
-
 
 # ******************************************************************************** #
 
