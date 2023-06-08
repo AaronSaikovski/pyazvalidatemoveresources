@@ -4,7 +4,7 @@ Azure Request Helper
 
 
 # ******************************************************************************** #
-def create_request_header(cached_access_token: str) -> str:
+def create_request_header(cached_access_token: str) -> dict:
     """
     Creates a request header to pass to the API call
     """

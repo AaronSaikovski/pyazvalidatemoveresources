@@ -5,7 +5,6 @@ from azure.identity import AzureCliCredential
 
 import common.constants as constants
 
-
 # ******************************************************************************** #
 
 

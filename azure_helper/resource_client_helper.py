@@ -21,6 +21,8 @@ def get_resource_client(source_subscription_id: str) -> ResourceManagementClient
     if sub_helper.check_valid_subscription_id(source_subscription_id):
         # Obtain the management object for resources.
         return ResourceManagementClient(credential, source_subscription_id)
+    else:
+        return None # type: ignore
 
 
 # ******************************************************************************** #

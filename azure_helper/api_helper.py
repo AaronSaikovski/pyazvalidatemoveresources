@@ -43,7 +43,7 @@ def call_validate_api(
 
 def call_management_api(
     source_api_response: requests.Response, request_header: str
-) -> str:
+) -> None:
     """
     Calls the Validation Management API URI from the raw initial payload
 
