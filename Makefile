@@ -50,15 +50,6 @@ install: activate
 ## test - Test the project
 test: activate
 	$(VIRTUAL_BIN)/pytest
-
-## isort - Sorts imports throughout the project
-isort: activate
-	$(VIRTUAL_BIN)/isort .
-
-## isort-check - Checks that imports throughout the project are sorted correctly
-isort-check: activate
-	$(VIRTUAL_BIN)/isort . --check-only
-
 ## lint - Lint the project using ruff --fix
 lint: activate
 	$(VIRTUAL_BIN)/ruff . --fix
@@ -71,4 +62,4 @@ typecheck: activate
 installer: activate
 	pyinstaller ./main.py
 
-.PHONY: help run clean format isort isort-check test lint freeze typecheck installer
+.PHONY: help run clean format  isort-check test lint freeze typecheck installer
