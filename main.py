@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Validates a source Azure resource group and all child resources to check 
 for moveability support into a target resource group within a target subscription.
@@ -26,15 +26,12 @@ import utils.console_helper as console_helper
 # Custom modules
 import utils.logging_helper as logging_helper
 
+# ******************************************************************************** #
 
-@logging_helper.log
-def main() -> None:
-    """
-    Main method
-    """
 
+def get_cmd_args() -> argparse.Namespace:
+    """Gets the args from the command line"""
     # help message string
-    # pylint: disable=line-too-long
     help_msg: str = (
         "Validates a source Azure resource group"
         "and all child resources to check for moveability support into a target"
@@ -64,7 +61,20 @@ def main() -> None:
         required=True,
         help="Target Resource Group.",
     )
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+# ******************************************************************************** #
+
+
+@logging_helper.log
+def main() -> None:
+    """
+    Main method
+    """
+
+    # get the args passed in to the command line
+    args = get_cmd_args()
 
     # set values from command line
     source_subscription_id = args.SourceSubscriptionId
@@ -72,37 +82,46 @@ def main() -> None:
     target_subscription_id = args.TargetSubscriptionId
     target_resource_group = args.TargetResourceGroup
 
-    console_helper.print_ok_message("***STARTED PROCESSING***")
+    # catch any exceptions and report back any issues
+    try:
+        console_helper.print_ok_message("***STARTED PROCESSING***")
 
-    # Obtain the management object for resources.
-    resource_client = res_client_helper.get_resource_client(source_subscription_id)
+        # Obtain the management object for resources.
+        resource_client = res_client_helper.get_resource_client(source_subscription_id)
 
-    # Get the resource IDs
-    resource_ids = res_client_helper.get_resource_ids(
-        resource_client, source_resource_group
-    )
+        # Get the resource IDs
+        resource_ids = res_client_helper.get_resource_ids(
+            resource_client, source_resource_group
+        )
 
-    # Build the request header - passing in the access token
-    request_header = req_helper.create_request_header(
-        auth_helper.get_az_cached_access_token()
-    )
+        # Build the request header - passing in the access token
+        request_header = req_helper.create_request_header(
+            auth_helper.get_az_cached_access_token()
+        )
 
-    # Build the body of the request to be passed to the API
-    request_body = req_helper.create_request_body(
-        target_subscription_id, target_resource_group, resource_ids
-    )
+        # Build the body of the request to be passed to the API
+        request_body = req_helper.create_request_body(
+            target_subscription_id, target_resource_group, resource_ids
+        )
 
-    # Call the API and get a response code back
-    api_response = api_helper.call_validate_api(
-        source_subscription_id, source_resource_group, request_header, request_body
-    )
+        # Call the API and get a response code back
+        api_response = api_helper.call_validate_api(
+            source_subscription_id, source_resource_group, request_header, request_body
+        )
 
-    # Call the management API
-    api_helper.call_management_api(api_response, request_header)
+        # Call the management API
+        api_helper.call_management_api(api_response, request_header)
 
-    console_helper.print_ok_message("***COMPLETED PROCESSING***")
+        console_helper.print_ok_message("***COMPLETED PROCESSING***")
 
+    except Exception as exp:  # noqa: BLE001
+        console_helper.print_error_message(f"Error occured:  {exp}")
+
+
+# ******************************************************************************** #
 
 # call main
 if __name__ == "__main__":
     main()
+
+# ******************************************************************************** #

@@ -4,12 +4,6 @@ Azure Request Helper
 
 
 # ******************************************************************************** #
-# def create_request_header(cached_access_token: str) -> dict:
-#     """
-#     Creates a request header to pass to the API call
-#     """
-#     # build the request header dictionary
-#         "Content-Type": "application/json",
 
 def create_request_header(cached_access_token: str) -> dict:
     """
@@ -24,16 +18,6 @@ def create_request_header(cached_access_token: str) -> dict:
 
 # ******************************************************************************** #
 
-
-# def create_request_body(
-#     target_subscription_id: str, target_resource_group: str, resource_ids: str
-# ) -> str:
-#     """
-#     Creates a request body to pass to the API
-#     """
-#     # pylint: disable=line-too-long
-#     ).replace("'", '"')
-
 def create_request_body(
     target_subscription_id: str, target_resource_group: str, resource_ids: str
 ) -> str:
@@ -47,6 +31,5 @@ def create_request_body(
     return str(
         {"resources": resource_ids, "targetResourceGroup": target_resource_group}
     ).replace("'", '"')
-
 
 # ******************************************************************************** #
