@@ -12,21 +12,6 @@ import utils.console_helper as console_helper
 # ******************************************************************************** #
 
 
-# def call_validate_api(
-#     source_subscription_id: str,
-#     source_resource_group: str,
-#     request_header: str,
-#     request_body: str,
-# ) -> requests.Response:
-#     """
-#     Calls the validateMoveResources to check if the resources can be moved.
-#     Ref: https://learn.microsoft.com/en-us/rest/api/resources/resources/validate-move-resources
-#     """
-#     # Build the API and call it and get the response code
-#     # pylint: disable=line-too-long
-
-#     # Call the API - Using requests library
-
 def call_validate_api(
     source_subscription_id: str,
     source_resource_group: str,
@@ -50,6 +35,7 @@ def call_validate_api(
         headers=request_header,
         timeout=constants.API_TIMEOUT,
     )
+
 
 # ******************************************************************************** #
 
@@ -101,10 +87,10 @@ def call_management_api(
         # Report status back
         # 204 - Success resources can be moved
         if validate_api_status_code == constants.API_RESOURCE_MOVE_OK:
-            console_helper.print_ok_message("**SUCCESS CODE = 204 - NO ISSUES FOUND**")
+            console_helper.print_ok_message("**HTTP CODE = 204 - NO ISSUES FOUND**")
         # 409 - resources cannot be moved
         elif validate_api_status_code == constants.API_RESOURCE_MOVE_FAIL:
-            console_helper.print_error_message("**ERROR CODE = 409 - ISSUES FOUND**")
+            console_helper.print_error_message("**HTTP  CODE = 409 - ISSUES FOUND**")
             console_helper.print_error_message(f"Error: {validate_api_response_data}")
         # Some other error
         else:

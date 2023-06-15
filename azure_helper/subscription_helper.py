@@ -14,13 +14,12 @@ def check_valid_subscription_id(subscription_id: str) -> bool:
     """
     # check if a string
     if isinstance(subscription_id, str):
-        # pylint: disable=line-too-long
-        # pylint: disable=anomalous-backslash-in-string
-        re_result = re.search(
-            "^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$",
-            subscription_id,
+        return bool(
+            re.search(
+                "^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$",
+                subscription_id,
+            )
         )
-        return bool(re_result)
     return False
 
 
