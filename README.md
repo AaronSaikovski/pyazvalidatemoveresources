@@ -19,6 +19,7 @@ Version History:
 - 3.0 - Now uses modules and has limited unit testing.
 - 3.0.2 - New makefile and updated github action.
 - 3.0.3 - Updated to use poetry - see makefile
+
 ### Description
 
 This script takes a Source SubscriptionID and Source ResourceGroup as parameters, analyzes the subscription/resource group.
@@ -31,6 +32,7 @@ and gathers a list of resource Ids and resources that can and cannot be moved to
 - Python v3.10 or higher needs to be installed - https://www.python.org/
 - Poetry v1.5.1 or higher needs to be installed - https://python-poetry.org/docs/#installation
 - Azure CLI tools 2.48.1 or later
+
 ### Azure Setup
 
 You must be logged into the Azure from the command line for this program to work. This program will use the CLIs current logged in identity.  
@@ -47,15 +49,10 @@ az account set --subscription "XXXX-XXXX-XXXX-XXXX"
 
 Using the `Makefile` will setup the full virtual environment using Poetry for you
 
-From bash, run:
+To setup the dependencies, run:
+`make install`
 
-```bash
-# Using the Makefile to create the environment, run:
-make create
-
-# For the Makefile usage, run:
-make help
-```
+This will setup the environment with the dependencies from the pyproject.toml file.
 
 ### Usage:
 

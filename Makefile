@@ -22,14 +22,19 @@ create:
 	poetry add --dev pytest pytest-cov black ruff ruff bandit safety pyinstaller
 	poetry add azure-common azure-core azure-identity azure-mgmt-core azure-mgmt-resource msal requests types-requests types-urllib3 typing_extensions
 
-## install - Install the packages 
-install: create
+## deps - Install the dependencies 
+deps: create
 	poetry add --dev pytest pytest-cov black ruff ruff bandit safety pyinstaller
 	poetry add azure-common azure-core azure-identity azure-mgmt-core azure-mgmt-resource msal requests types-requests types-urllib3 typing_extensions
 
 ## activate - Activates the virtual environment
 activate: 
 	. ./.venv/bin/activate
+
+
+## install - installs the poetry environment with dependencies
+install: 
+	poetry install
 
 ## run - Run the script main.py
 run:  
@@ -60,4 +65,4 @@ lint: activate
 installer: activate
 	pyinstaller ./main.py
 
-.PHONY: help run clean test lint installer
+.PHONY: help run clean test lint installer deps install
