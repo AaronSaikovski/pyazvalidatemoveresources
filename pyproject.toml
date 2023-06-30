@@ -29,10 +29,10 @@ show-fixes = true
 # Assume Python 3.11.
 target-version = "py311"
 [tool.poetry]
-name = "pystarter"
-version = "0.1.0"
-description = "a sample python project"
-authors = ["A User <auser@someorg.com>"]
+name = "pyazvalidatemoveresources"
+version = "3.0.3"
+description = "Azure resource move validation Python script"
+authors = ["Aaron Saikovski <asaikovski@outlook.com>"]
 license = "MIT"
 readme = "README.md"
 

@@ -4,10 +4,10 @@
 
 # Set Project Variables
 PROJECT_PYTHON_VER = ">=3.11,<3.13"
-PROJECT_NAME = "pystarter"
-PROJECT_DESC = "a sample python project"
-PROJECT_AUTHOR = "A User <auser@someorg.com>"
-PROJECT_VERSION = "1.0.0"
+PROJECT_NAME = "pyazvalidatemoveresources"
+PROJECT_DESC = "Azure resource move validation Python script"
+PROJECT_AUTHOR = "Aaron Saikovski <asaikovski@outlook.com>"
+PROJECT_VERSION = "3.0.3"
 PROJECT_LICENSE ="MIT"
 
 ## help - Display help about make targets for this Makefile
