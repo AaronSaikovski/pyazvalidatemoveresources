@@ -18,7 +18,7 @@ Version History:
 - 2.0 - Now uses command line arguments and better error handling, other bug fixes.
 - 3.0 - Now uses modules and has limited unit testing.
 - 3.0.2 - New makefile and updated github action.
-
+- 3.0.3 - Updated to use poetry - see makefile
 ### Description
 
 This script takes a Source SubscriptionID and Source ResourceGroup as parameters, analyzes the subscription/resource group.
@@ -28,11 +28,9 @@ and gathers a list of resource Ids and resources that can and cannot be moved to
 
 ### Software Requirements
 
-- Python 3.10.10 or later
-- pip 23.0.1 or later
+- Python v3.10 or higher needs to be installed - https://www.python.org/
+- Poetry v1.5.1 or higher needs to be installed - https://python-poetry.org/docs/#installation
 - Azure CLI tools 2.48.1 or later
-- Python virtual environment and packages as specified in requirements.txt.
-
 ### Azure Setup
 
 You must be logged into the Azure from the command line for this program to work. This program will use the CLIs current logged in identity.  
@@ -47,7 +45,7 @@ az account set --subscription "XXXX-XXXX-XXXX-XXXX"
 
 ### Python Environment Setup:
 
-Using the `Makefile` will setup the full virtual environment using PIP and the `requirements.txt` file.
+Using the `Makefile` will setup the full virtual environment using Poetry for you
 
 From bash, run:
 
@@ -62,7 +60,7 @@ make help
 ### Usage:
 
 ```bash
-python3 main.py --SourceSubscriptionId "XXXX-XXXX-XXXX-XXXX" --SourceResourceGroup "SourceRSG" --TargetSubscriptionId "XXXX-XXXX-XXXX-XXXX" --TargetResourceGroup "TargetRSG"
+poetry run python main.py --SourceSubscriptionId "XXXX-XXXX-XXXX-XXXX" --SourceResourceGroup "SourceRSG" --TargetSubscriptionId "XXXX-XXXX-XXXX-XXXX" --TargetResourceGroup "TargetRSG"
 ```
 
 ### Known issues and limitations
