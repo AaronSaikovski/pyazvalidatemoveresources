@@ -4,10 +4,10 @@
 
 # Set Project Variables
 PROJECT_PYTHON_VER = ">=3.11,<3.13"
-PROJECT_NAME = "pyazvalidatemoveresources"
-PROJECT_DESC = "Azure resource move validation Python script"
-PROJECT_AUTHOR = "Aaron Saikovski <asaikovski@outlook.com>"
-PROJECT_VERSION = "3.0.3"
+PROJECT_NAME = "pystarter"
+PROJECT_DESC = "a sample python project"
+PROJECT_AUTHOR = "A User <auser@someorg.com>"
+PROJECT_VERSION = "1.0.0"
 PROJECT_LICENSE ="MIT"
 
 ## help - Display help about make targets for this Makefile
@@ -23,21 +23,19 @@ create:
 	poetry add azure-common azure-core azure-identity azure-mgmt-core azure-mgmt-resource msal requests types-requests types-urllib3 typing_extensions
 
 ## deps - Install the dependencies 
-deps: create
+deps: 
 	poetry add --dev pytest pytest-cov black ruff ruff bandit safety pyinstaller
-	poetry add azure-common azure-core azure-identity azure-mgmt-core azure-mgmt-resource msal requests types-requests types-urllib3 typing_extensions
 
 ## activate - Activates the virtual environment
 activate: 
 	. ./.venv/bin/activate
-
 
 ## install - installs the poetry environment with dependencies
 install: 
 	poetry install
 
 ## run - Run the script main.py
-run:  
+run:  activate
 	poetry run python main.py
 
 ## clean - Cleans the environment, Overwrites the pyproject.toml file
@@ -57,12 +55,16 @@ clean:
 test: activate
 	poetry run python -m pytest tests
 
+## update - updates dependency versions
+update: activate
+	poetry update -v
+
 ## lint - Lints the project using ruff --fix
 lint: activate
 	poetry run ruff . --fix
 
 ## installer - uses pyinstaller to package your Python application into a single package
 installer: activate
-	poetry run pyinstaller ./main.py
+	pyinstaller ./main.py
 
 .PHONY: help run clean test lint installer deps install
