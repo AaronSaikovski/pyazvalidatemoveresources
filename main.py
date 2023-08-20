@@ -113,7 +113,7 @@ def main() -> None:
         console_helper.print_ok_message("***COMPLETED PROCESSING***")
 
     except Exception as exp:  # noqa: BLE001
-        console_helper.print_error_message(f"Error occured:  {exp}")
+        console_helper.print_error_message(f"Error occurred:  {exp}")
 
 
 # ******************************************************************************** #
