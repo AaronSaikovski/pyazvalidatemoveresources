@@ -28,38 +28,3 @@ show-fixes = true
 
 # Assume Python 3.11.
 target-version = "py311"
-[tool.poetry]
-name = "pystarter"
-version = "0.1.0"
-description = "a sample python project"
-authors = ["A User <auser@someorg.com>"]
-license = "MIT"
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = ">=3.11,<3.13"
-azure-common = "^1.1.28"
-azure-core = "^1.29.0"
-azure-identity = "^1.14.0"
-azure-mgmt-core = "^1.4.0"
-azure-mgmt-resource = "^23.0.1"
-msal = "^1.23.0"
-requests = "^2.31.0"
-types-requests = "^2.31.0.2"
-types-urllib3 = "^1.26.25.14"
-typing-extensions = "^4.7.1"
-bandit = "^1.7.5"
-
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.0"
-pytest-cov = "^4.1.0"
-black = "^23.7.0"
-ruff = "^0.0.284"
-bandit = "^1.7.5"
-safety = "^2.3.5"
-pyinstaller = "^5.13.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
