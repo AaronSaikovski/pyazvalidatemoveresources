@@ -2,8 +2,6 @@
 
 # Python - Validate Move Azure Resources
 
-**This project has been archived and future development will be continued here - [AzureFlexer](https://github.com/AaronSaikovski/AzureFlexer).**
-
 Validates a source Azure resource group and all child resources to check for moveability support into a target resource group within a target subscription.
 
 [![Build Status](https://github.com/AaronSaikovski/pyazvalidatemoveresources/workflows/build/badge.svg)](https://github.com/AaronSaikovski/pyazvalidatemoveresources/actions)
