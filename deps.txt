@@ -1,0 +1,16 @@
+ruff
+pytest
+pytest-cov
+black
+bandit
+argparse
+pyinstaller
+requests
+types-requests
+types-urllib3
+typing_extensions
+azure-cli
+azure-common
+azure-core
+azure-cli-core
+azure-identity
