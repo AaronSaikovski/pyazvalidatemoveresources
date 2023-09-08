@@ -28,3 +28,32 @@ show-fixes = true
 
 # Assume Python 3.11.
 target-version = "py311"
+[tool.poetry]
+name = "pyazvalidatemoveresources"
+version = "0.1.0"
+description = "Azure resource move validation Python script"
+authors = ["Aaron Saikovski <asaikovski@outlook.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+azure-cli = "^2.52.0"
+azure-cli-core = "^2.52.0"
+azure-core = "^1.29.4"
+azure-identity = "^1.14.0"
+azure-common = "^1.1.28"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+black = "^23.7.0"
+ruff = "^0.0.287"
+bandit = "^1.7.5"
+safety = "^2.3.5"
+pyinstaller = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
