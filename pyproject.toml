@@ -26,8 +26,8 @@ extend-select = [
 ignore=["E402","B905","N818","S101","T201"]
 show-fixes = true
 
-# Assume Python 3.11.
-target-version = "py311"
+# Assume Python 3.12.
+target-version = "py312"
 [tool.poetry]
 name = "pyazvalidatemoveresources"
 version = "0.1.0"
