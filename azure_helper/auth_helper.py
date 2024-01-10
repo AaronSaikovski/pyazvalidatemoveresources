@@ -8,7 +8,6 @@ import common.constants as constants
 
 # ******************************************************************************** #
 
-
 def get_az_cached_access_token() -> AccessToken:
     """
     Gets the cached access token from the AZ CLI session token
