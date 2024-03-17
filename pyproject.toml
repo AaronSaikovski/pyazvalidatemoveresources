@@ -1,33 +1,3 @@
-[tool.ruff] 
-extend-select = [
-    "B",
-    "BLE",
-    "C4",
-    "ERA",
-    "I",
-    "ICN",
-    "INP",
-    "ISC",
-    "N",
-    "NPY",
-    "PGH",
-    "PIE",
-    "Q",
-    "RET",
-    "RSE",
-    "RUF",
-    "S",
-    "SIM",
-    "T20",
-    "TCH",
-    "TID",
-    "YTT",
-]
-ignore=["E402","B905","N818","S101","T201"]
-show-fixes = true
-
-# Assume Python 3.12.
-target-version = "py312"
 [tool.poetry]
 name = "pyazvalidatemoveresources"
 version = "0.1.0"
@@ -37,22 +7,19 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.13"
-azure-cli = "^2.52.0"
-azure-cli-core = "^2.52.0"
-azure-core = "^1.29.4"
-azure-identity = "^1.14.0"
-azure-common = "^1.1.28"
+python = ">=3.12"
+azure-mgmt-resource = "^23.0.1"
+azure-identity = "^1.15.0"
+azure-mgmt-storage = "^21.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
+pytest = "^8.1.1"
 pytest-cov = "^4.1.0"
-black = "^23.7.0"
-ruff = "^0.0.287"
-bandit = "^1.7.5"
-safety = "^2.3.5"
-pyinstaller = "^5.13.2"
+black = "^24.3.0"
+ruff = "^0.3.3"
+bandit = "^1.7.8"
+safety = "^3.0.1"
 
 [build-system]
 requires = ["poetry-core"]

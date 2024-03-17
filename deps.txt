@@ -14,3 +14,6 @@ azure-common
 azure-core
 azure-cli-core
 azure-identity
+
+
+poetry add azure-mgmt-resource azure-identity azure-mgmt-storage

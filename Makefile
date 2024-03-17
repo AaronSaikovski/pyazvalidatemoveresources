@@ -3,7 +3,8 @@
 .DEFAULT_GOAL := create
 
 # Set Project Variables
-PROJECT_PYTHON_VER = ">=3.11,<3.13"
+#PROJECT_PYTHON_VER = ">=3.11,<3.13"
+PROJECT_PYTHON_VER = ">=3.12"
 PROJECT_NAME = "pyazvalidatemoveresources"
 PROJECT_DESC = "Azure resource move validation Python script"
 PROJECT_AUTHOR = "Aaron Saikovski <asaikovski@outlook.com>"
@@ -18,12 +19,13 @@ help:
 create: 
 	poetry config virtualenvs.in-project true
 	poetry init --name=$(PROJECT_NAME) --description=$(PROJECT_DESC) --author=$(PROJECT_AUTHOR) --python=$(PROJECT_PYTHON_VER) --license=$(PROJECT_LICENSE) --no-interaction 
-	poetry update
-	poetry add --dev pytest pytest-cov black ruff ruff bandit safety pyinstaller
+	poetry env use python3.12
 
 ## deps - Install the dependencies 
 deps: 
-	poetry add --dev pytest pytest-cov black ruff ruff bandit safety pyinstaller
+	poetry add --dev pytest pytest-cov black ruff ruff bandit safety
+	poetry add azure-mgmt-resource azure-identity azure-mgmt-storage
+	poetry update
 
 ## activate - Activates the virtual environment
 activate: 
