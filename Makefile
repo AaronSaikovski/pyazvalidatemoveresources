@@ -3,8 +3,7 @@
 .DEFAULT_GOAL := create
 
 # Set Project Variables
-#PROJECT_PYTHON_VER = ">=3.11,<3.13"
-PROJECT_PYTHON_VER = ">=3.12"
+PROJECT_PYTHON_VER = ">=3.12,<3.13"
 PROJECT_NAME = "pyazvalidatemoveresources"
 PROJECT_DESC = "Azure resource move validation Python script"
 PROJECT_AUTHOR = "Aaron Saikovski <asaikovski@outlook.com>"
@@ -23,7 +22,7 @@ create:
 
 ## deps - Install the dependencies 
 deps: 
-	poetry add --dev pytest pytest-cov black ruff ruff bandit safety
+	poetry add --dev pytest pytest-cov black ruff ruff bandit safety pyinstaller
 	poetry add azure-mgmt-resource azure-identity azure-mgmt-storage
 	poetry update
 
