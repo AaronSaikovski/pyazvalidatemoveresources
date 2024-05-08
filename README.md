@@ -2,6 +2,8 @@
 
 # Python - Validate Move Azure Resources
 
+### ** Please note that this project has been deprecated and no longer supported. It has been replaced by [ARMV](https://github.com/AaronSaikovski/armv) **
+
 Validates a source Azure resource group and all child resources to check for moveability support into a target resource group within a target subscription.
 
 [![Build Status](https://github.com/AaronSaikovski/pyazvalidatemoveresources/workflows/build/badge.svg)](https://github.com/AaronSaikovski/pyazvalidatemoveresources/actions)
